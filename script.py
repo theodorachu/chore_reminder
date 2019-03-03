@@ -9,7 +9,7 @@ from sendgrid.helpers.mail import *
 
 sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
 from_email = Email("chores@2202bryant.com")
-to_email = Email("theodorachu@gmail.com")
+to_email = Email("dennisaxu@gmail.com")
 subject = "Sending with SendGrid is Fun"
 content = Content("text/plain", "and easy to do anywhere, even with Python")
 mail = Mail(from_email, subject, to_email, content)
