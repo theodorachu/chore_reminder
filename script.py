@@ -52,7 +52,14 @@ def main():
 				from_email = Email("chores@2202bryant.com")
 				to_email = Email(row[2])
 				subject = "It's your chore week!"
-				content = Content("text/plain", "Your chore for the week is %s" %(row[1]))
+				
+				body = "Your chore for the week is %s." %(row[1])
+				if row[1] == 'kitchen':
+					body += "\n Your tasks are: clean whatever is in the sink (or get the one responsible to do it), sanitize counter + table, clean fridge shelves & throw out old things, swiffer floor, take out all recycling & trash, and beat/sanitize the sink rug."
+				if row[1] == 'floors+bath':
+					body += "\n Your tasks are: sweep/vacuum + swiffer main hallway, sanitize bathroom sink & toilets, sanitize bathroom mat with disinfectant spray, sanitize bath tub, swiffer bathroom floors, take out bathroom trash."
+
+				content = Content("text/plain", body)
 				mail = Mail(from_email, subject, to_email, content)
 				response = sg.client.mail.send.post(request_body=mail.get())
 
