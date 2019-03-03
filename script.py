@@ -44,10 +44,10 @@ def main():
 		print('No data found.')
 	else:
 		for row in values: #Date, task, person
-			print('%s, %s, %s' % (row[0], row[1], row[2]))
 			date = row[0]
 			today = now.strftime("%d/%m/%Y")
 			if date == today:
+				# this week
 				sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
 				from_email = Email("chores@2202bryant.com")
 				to_email = Email(row[2])
@@ -55,9 +55,6 @@ def main():
 				content = Content("text/plain", "Your chore for the week is %s" %(row[1]))
 				mail = Mail(from_email, subject, to_email, content)
 				response = sg.client.mail.send.post(request_body=mail.get())
-				print(response.status_code)
-				print(response.body)
-				print(response.headers)
 
 if __name__ == '__main__':
 	main()
